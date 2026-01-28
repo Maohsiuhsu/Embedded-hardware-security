@@ -1,0 +1,52 @@
+model:
+  name: FingerVIT
+  size: small
+  num_classes: 2
+  num_fake_types: 4
+  dims: [40, 80, 160]
+  depths: [2, 4, 6]
+  types: ["repmix", "mhsa", "mhsa"]
+  patch_size: 4
+  img_size: 112
+  in_chans: 1
+
+training:
+  batch_size: 32
+  num_workers: 4
+  epochs: 50
+  lr: 0.001
+  weight_decay: 1e-4
+  optimizer: AdamW
+  scheduler: CosineAnnealingLR
+  T_max: 50
+
+loss:
+  sep_weight: 0.0
+  cons_weight: 0.0
+  fake_type_weight: 0.0
+
+data:
+  real_path: /path/to/real
+  fake_paths:
+    - /path/to/fake1
+  train_ratio: 0.8
+  val_ratio: 0.2
+
+evaluation:
+  metrics:
+    - APCER
+    - BPCER
+    - ACE
+    - AUC
+    - Accuracy
+
+device: cuda
+
+ablation:
+  name: k4
+  description: Ablation study with k=4 fake types
+  limited_fake_types:
+    - DDIM
+    - guided
+    - cycleGan
+    - StyleGAN

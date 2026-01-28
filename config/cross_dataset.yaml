@@ -1,0 +1,63 @@
+model:
+  name: FingerVIT
+  size: large
+  num_classes: 2
+  num_fake_types: 4
+  dims: [96, 192, 384]
+  depths: [2, 4, 6]
+  types: ["repmix", "mhsa", "mhsa"]
+  patch_size: 4
+  img_size: 112
+  in_chans: 1
+
+training:
+  batch_size: 16
+  num_workers: 4
+  epochs: 50
+  lr: 0.001
+  weight_decay: 1e-4
+  optimizer: AdamW
+  scheduler: CosineAnnealingLR
+  T_max: 50
+
+loss:
+  sep_weight: 0.1
+  cons_weight: 0.1
+  fake_type_weight: 0.1
+
+data:
+  train:
+    real_path: /path/to/train/real
+    fake_paths:
+      - /path/to/train/fake1
+      - /path/to/train/fake2
+  test:
+    real_path: /path/to/test/real
+    fake_paths:
+      - /path/to/test/fake1
+      - /path/to/test/fake2
+      - /path/to/test/fake3
+  train_ratio: 0.8
+  val_ratio: 0.2
+
+evaluation:
+  metrics:
+    - APCER
+    - BPCER
+    - ACE
+    - AUC
+    - Accuracy
+    - Precision
+    - Recall
+    - F1_Score
+  cross_dataset: true
+
+device: cuda
+
+cross_dataset:
+  train_datasets:
+    - LivDet2015
+  test_datasets:
+    - LivDet2015
+    - LivDet2017
+    - LivDet2019
