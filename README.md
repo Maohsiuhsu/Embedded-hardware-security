@@ -1,4 +1,4 @@
-# Fingerprint Anti-Spoofing Detection Project - Reviewer Key Code
+# Input Level Defense against Generative Fingerprint Attacks in Embedded Authentication Systems
 
 This directory contains core code that reviewers will focus on, demonstrating key design and implementation of the research.
 
