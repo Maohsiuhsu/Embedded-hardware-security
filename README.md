@@ -1,4 +1,4 @@
-# Input Level Defense against Generative Fingerprint Attacks in Embedded Authentication Systems
+# FingerViT: Open-Set Fingerprint Forgery Detection for Partial Fingerprints
 
 This directory contains core code that reviewers will focus on, demonstrating key design and implementation of the research.
 
